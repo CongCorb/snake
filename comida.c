@@ -28,6 +28,12 @@ void comida_generar(struct body* body, struct cabeza* cabeza, struct comida* com
 		
 			comida->posicion_X = rand() % pantalla->ancho;
 			comida->posicion_Y = rand() % pantalla->alto;
+		if(comida->posicion_X == 0){
+			comida->posicion_X++;
+		}
+		if(comida->posicion_Y == 0){
+			comida->posicion_Y++;
+		}
 
 		if(comida_comprobar(body,cabeza, comida) == true){
 			break;

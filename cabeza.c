@@ -65,6 +65,12 @@ bool cabeza_pared(struct cabeza* cabeza, struct pantalla *pantalla){
 	if ((cabeza->posicion_act_Y - pantalla->alto) >= 0) {
 	 	return false;
 	}
+	if((cabeza->posicion_act_X) < 0){
+		return false;
+	}
+	if((cabeza->posicion_act_Y) < 0){
+		return false;
+	}
 
 	 return true;
 }

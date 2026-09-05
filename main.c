@@ -115,8 +115,8 @@ int main (){
 	                int record = cabeza_record(&cabeza, &comida);  
 	      
 		        if(record){
+				cabeza.score++;	
 				cuerpo_nuevo(&cuerpo);
-				cabeza.score++;
 				comida_generar(&cuerpo, &cabeza, &comida, &pantalla);	
 			}
 		     
@@ -139,7 +139,7 @@ int main (){
                        	//===========Ncurses=============
 	 	        
 		 	wclear(juego);
-                       
+			
 			box(juego,0,0);
 
 			mvwprintw(juego, comida.posicion_Y, comida.posicion_X, "C");
@@ -150,10 +150,10 @@ int main (){
  
 		if(record){
 
-                       	mvprintw((((LINES- pantalla.alto)/2)+1), (((COLS - pantalla.ancho)/2)+1), "%d", cabeza.score); 
+                       	mvprintw((((LINES- pantalla.alto)/2)-2), (((COLS - pantalla.ancho)/2)+2), "score: %d", cabeza.score); 
 		}
 			
-			refresh();
+			refresh();	
 			wrefresh(juego);
 
 			napms(86);
