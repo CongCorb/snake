@@ -1,6 +1,7 @@
 #ifndef SNAKE
 #define SNAKE
 #include <stdbool.h>
+#include <ncurses.h>
 struct cabeza{
 	//
 	//dirreciones son:
@@ -47,6 +48,8 @@ struct pantalla{
 	//=========Cuerpo========
 	void crear_cuerpo(struct body* body);	//crea una nueva cola
 	void refresh_posicion(struct body* body, struct cabeza* cabeza); //actualiza la estructura de la pocision de la cola global
+	void cuerpo_pintar(struct body* body, WINDOW* juego);
+	void cuerpo_nuevo(struct body* body);
 	//=================
 
 

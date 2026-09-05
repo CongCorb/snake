@@ -8,19 +8,19 @@ void cabeza_mover(struct cabeza* cabeza, int dirreccion){
 	
 	case 0: // izquierda 
 		cabeza->posicion_ant_X = cabeza->posicion_act_X;
-		cabeza->posicion_act_X = cabeza->posicion_act_X--;
+		cabeza->posicion_act_X--;
 		break;
 	case 1: // derecha
 		cabeza->posicion_ant_X = cabeza->posicion_act_X;
-		cabeza->posicion_act_X = cabeza->posicion_act_X++;
+		cabeza->posicion_act_X++;
 		break;
 	case 2: // arriba 
 		cabeza->posicion_ant_Y = cabeza->posicion_act_Y;
-		cabeza->posicion_act_Y = cabeza->posicion_act_Y--;
+		cabeza->posicion_act_Y--;
 		break;
 	case 3: //abajo
 		cabeza->posicion_ant_Y = cabeza->posicion_act_Y;
-		cabeza->posicion_act_Y = cabeza->posicion_act_Y++;
+		cabeza->posicion_act_Y++;
 		break;
 	}
 	

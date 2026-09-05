@@ -31,6 +31,7 @@ int main (){
 	comida.posicion_Y = 0;
 
 	cabeza.dirrecion = 1;
+	cabeza.score = 0;
 
 	cabeza.posicion_act_X = (pantalla.alto / 5); // siempre tiene que dar un numero natural distinto de 0
 	cabeza.posicion_act_Y = (pantalla.ancho / 4);// en ambos casos ¬¬
@@ -69,9 +70,10 @@ int main (){
 
 	box(juego, 0, 0);
 
-	crear_cuerpo(&cuerpo);
-  
+	comida_generar(&cuerpo, &cabeza, &comida, &pantalla);
+ 
 	while(1){
+
 
  		int ch = getch();
 
@@ -105,31 +107,56 @@ int main (){
 				endwin();
 				return 0;
 				break;
-			case -1:
-				endwin();
-				return 0;
-				break;
 		}
 			cabeza_mover(&cabeza, cabeza.dirrecion);
 			refresh_posicion(&cuerpo, &cabeza);
-		        comida_generar(&cuerpo, &cabeza, &comida, &pantalla);
-		         
-		        cabeza_record(&cabeza, &comida);
-		        cabeza_suicidio(&cabeza, &cuerpo);
-		        cabeza_pared(&cabeza, &pantalla);
+		        
+					
+	                int record = cabeza_record(&cabeza, &comida);  
+	      
+		        if(record){
+				cuerpo_nuevo(&cuerpo);
+				cabeza.score++;
+				comida_generar(&cuerpo, &cabeza, &comida, &pantalla);	
+			}
+		     
 
+                            //============ Muerte===========
+		if(!(cabeza_pared(&cabeza, &pantalla))){
+                     	
+			endwin();
+			return 0;
+		}
+		if(!(cabeza_suicidio(&cabeza, &cuerpo))){
+                     	
+			endwin();
+			return 0;
+		}
+		        
+
+			
+			
                        	//===========Ncurses=============
-	 	        mvwprintw(juego, comida.posicion_Y, comida.posicion_X, "C");
-                         
-		        mvwprintw(juego, cabeza.posicion_act_Y, cabeza.posicion_act_X, "M");
+	 	        
+		 	wclear(juego);
+                       
+			box(juego,0,0);
 
-		        mvwprintw(juego, cuerpo.posicion_act_Y, cuerpo.posicion_act_X, "#");
+			mvwprintw(juego, comida.posicion_Y, comida.posicion_X, "C");
+                         
+		        mvwprintw(juego, cabeza.posicion_act_Y, cabeza.posicion_act_X, "O");
+
+		        cuerpo_pintar(&cuerpo, juego);
  
+		if(record){
+
                        	mvprintw((((LINES- pantalla.alto)/2)+1), (((COLS - pantalla.ancho)/2)+1), "%d", cabeza.score); 
+		}
 			
 			refresh();
+			wrefresh(juego);
 
-			napms(9999); //no parece funcionar :c
+			napms(86);
 
 			//============================
 	}

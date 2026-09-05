@@ -1,8 +1,7 @@
 #include "snake.h"
 #include <stdbool.h>
 #include <stdlib.h>
-
-#include <stdio.h>
+#include <ncurses.h>
 
 void crear_cuerpo(struct body* body){
 
@@ -63,4 +62,36 @@ void refresh_posicion(struct body* body, struct cabeza* cabeza){
 	}
 }
 
+void cuerpo_nuevo(struct body* body){
 
+	if(body == NULL){
+		return;
+	}
+	
+	struct body* rec = body;
+
+	while (rec->sig != NULL) {
+		rec = rec->sig;
+	}
+	crear_cuerpo(rec);
+
+}
+
+void cuerpo_pintar(struct body* body, WINDOW* juego){
+
+	if(body == NULL){
+		return;
+	}
+
+	struct body* rec = body;
+
+		mvwprintw(juego, body->posicion_act_Y, body->posicion_act_X, "#");
+
+                rec = rec->sig;
+
+		while(rec != NULL){
+			
+			mvwprintw(juego, rec->posicion_act_Y, rec->posicion_act_X, "#");
+                 	rec = rec->sig;
+		}
+}
