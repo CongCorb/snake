@@ -16,6 +16,7 @@ struct cabeza{
 	int posicion_act_Y;
 
 	int score;
+	int dirrecion;
 };
 
 struct body{
@@ -45,7 +46,7 @@ struct pantalla{
 };
 	//=========Cuerpo========
 	void crear_cuerpo(struct body* body);	//crea una nueva cola
-	void refresh_posicion(struct body** body, struct cabeza* cabeza); //actualiza la estructura de la pocision de la cola global
+	void refresh_posicion(struct body* body, struct cabeza* cabeza); //actualiza la estructura de la pocision de la cola global
 	//=================
 
 
@@ -57,8 +58,7 @@ struct pantalla{
 	//============== Cabeza============
 	void cabeza_mover(struct cabeza* cabeza, int dirreccion); //recibe la dirrecion y escribe la nueva pocicion en el struct
 	bool cabeza_record(struct cabeza* cabeza, struct comida* comida); // actualiza la puntuacion del jugador
-	bool cabeza_suicidio(struct cabeza* cabeza, struct body* body); // comprobar si la serpiente se choco con sigo misma
-		
-	bool cabeza_pared(struct cabeza* cabeza, struct pantalla* pantalla);
+	bool cabeza_suicidio(struct cabeza* cabeza, struct body* body); // comprobar si la serpiente se choco con sigo misma	
+	bool cabeza_pared(struct cabeza* cabeza, struct pantalla* pantalla); //comprobar muerte por pared
 	//===============
 #endif

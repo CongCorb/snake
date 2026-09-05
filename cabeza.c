@@ -6,19 +6,19 @@ void cabeza_mover(struct cabeza* cabeza, int dirreccion){
 
 	switch (dirreccion){
 	
-	case 0:
+	case 0: // izquierda 
 		cabeza->posicion_ant_X = cabeza->posicion_act_X;
 		cabeza->posicion_act_X = cabeza->posicion_act_X--;
 		break;
-	case 1:
+	case 1: // derecha
 		cabeza->posicion_ant_X = cabeza->posicion_act_X;
 		cabeza->posicion_act_X = cabeza->posicion_act_X++;
 		break;
-	case 2:
+	case 2: // arriba 
 		cabeza->posicion_ant_Y = cabeza->posicion_act_Y;
 		cabeza->posicion_act_Y = cabeza->posicion_act_Y--;
 		break;
-	case 3:
+	case 3: //abajo
 		cabeza->posicion_ant_Y = cabeza->posicion_act_Y;
 		cabeza->posicion_act_Y = cabeza->posicion_act_Y++;
 		break;
@@ -56,18 +56,14 @@ bool cabeza_suicidio(struct cabeza* cabeza, struct body* body){
 
 bool cabeza_pared(struct cabeza* cabeza, struct pantalla *pantalla){
 
+	//true es vive
+	//false es muere
 
-	if (((cabeza->posicion_act_X % pantalla->ancho) - cabeza->posicion_act_X) == 0) {
+	if ((cabeza->posicion_act_X - pantalla->ancho) >= 0) {
 		return false;
 	}
-	if (((cabeza->posicion_act_Y % pantalla->alto) - cabeza->posicion_act_Y) == 0) {
+	if ((cabeza->posicion_act_Y - pantalla->alto) >= 0) {
 	 	return false;
-	}
-	if (cabeza->posicion_act_X < 0) {
-	 	return false;
-	}
-	if (cabeza->posicion_act_Y < 0) {
-	 	return false; 
 	}
 
 	 return true;

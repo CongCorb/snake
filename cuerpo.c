@@ -24,13 +24,13 @@ void crear_cuerpo(struct body* body){
 	body->sig = nuevo;
 }
 
-void refresh_posicion(struct body** body, struct cabeza* cabeza){
+void refresh_posicion(struct body* body, struct cabeza* cabeza){
 
-	if(*body == NULL){
+	if(body == NULL){
 		return;
 	}
 
-	struct body* rec = *body;
+	struct body* rec = body;
 
 	int temp_X = rec->posicion_act_X;
     	int temp_Y = rec->posicion_act_Y;
